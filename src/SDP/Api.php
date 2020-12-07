@@ -572,42 +572,6 @@ class Api {
     return $result ? json_decode($result, true) : false;
   }
 
-  /**
-  * Get Game Config.
-  *
-  * @param int $chat_id
-  * @param string $key
-  *
-  * @return mixed
-  * @throws \Exception
-  */
-	public function getGameConfig($chat_id, $key = null) {
-		$params = compact('chat_id', 'key');
-		$result = $this->sendRequest(null, $params, 'getGameConfig');
-		return $result ? json_decode($result, true)['configs'] : false;
-  }
- 
-  /**
-  * Game Event.
-  *
-  * @param int $chat_id
-  * @param string $event
-  * @param string $value
-  *
-  * @return mixed
-  * @throws \Exception
-  */
-	public function gameEvent($chat_id, $event, $value) {
-		if(empty($event)){
-			throw new \Exception('Invalid Event!');
-		}
-		if(empty($value)){
-			throw new \Exception('Invalid Value!');
-		}
-		$params = compact('chat_id', 'event', 'value');
-		return $this->sendRequest(null, $params, 'gameEvent');
-  }
-  
   private function sendRequest($msgType, $params, $method = 'sendMessage') {
     if ($msgType) {
       $params['type'] = $msgType;
